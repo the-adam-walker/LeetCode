@@ -1,13 +1,21 @@
+import java.util.*;
+
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-      // O(n^2)
-      for(int firstPass = 0; firstPass < nums.length; firstPass++) {
-        for(int secondPass = firstPass + 1; secondPass <  nums.length; secondPass++) {
-          if(nums[firstPass] + nums[secondPass] == target) {
-            return new int[] {firstPass, secondPass};
-          }
+
+      Map<Integer, Integer> map = new HashMap<>();
+
+      for (int i = 0; i < nums.length; i++) {
+        map.put(nums[i], i);
+      }
+
+      for (int i = 0; i < nums.length; i++) {
+        int compliment = target - nums[i];
+        if (map.containsKey(compliment) && map.get(compliment) != i) {
+          return new int[] { i, map.get(compliment) };
         }
       }
+
       return null;
     }
 }
